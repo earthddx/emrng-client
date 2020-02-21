@@ -1,15 +1,16 @@
-import React, { useReducer, createContext } from 'react';
-import jwtDecode from 'jwt-decode';
+import React, { createContext, useReducer } from "react";
+import jwtDecode from "jwt-decode";
 
 const initialState = {
   user: null
 };
 
-if (localStorage.getItem('jwtToken')) {
-  const decodedToken = jwtDecode(localStorage.getItem('jwtToken'));
+//check if user time out(token) expired or not
+if (localStorage.getItem("jwtToken")) {
+  const decodedToken = jwtDecode(localStorage.getItem("jwtToken"));
 
   if (decodedToken.exp * 1000 < Date.now()) {
-    localStorage.removeItem('jwtToken');
+    localStorage.removeItem("jwtToken");
   } else {
     initialState.user = decodedToken;
   }
@@ -17,18 +18,18 @@ if (localStorage.getItem('jwtToken')) {
 
 const AuthContext = createContext({
   user: null,
-  login: (userData) => {},
+  login: userData => {},
   logout: () => {}
 });
 
 function authReducer(state, action) {
   switch (action.type) {
-    case 'LOGIN':
+    case "LOGIN":
       return {
         ...state,
         user: action.payload
       };
-    case 'LOGOUT':
+    case "LOGOUT":
       return {
         ...state,
         user: null
@@ -41,18 +42,20 @@ function authReducer(state, action) {
 function AuthProvider(props) {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
-  function login(userData) {
-    localStorage.setItem('jwtToken', userData.token);
+  const login = userData => {
+    localStorage.setItem("jwtToken", userData.token); //save the user to local storage
     dispatch({
-      type: 'LOGIN',
+      type: "LOGIN",
       payload: userData
     });
-  }
+  };
 
-  function logout() {
-    localStorage.removeItem('jwtToken');
-    dispatch({ type: 'LOGOUT' });
-  }
+  const logout = () => {
+    localStorage.removeItem("jwtToken");
+    dispatch({
+      type: "LOGOUT"
+    });
+  };
 
   return (
     <AuthContext.Provider

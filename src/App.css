@@ -1,16 +1,54 @@
+.ui.secondary.menu {
+  font-size: 1.3rem;
+  background-color: rgb(64, 69, 138);
+  padding-bottom: 0.1rem;
+}
+
+.ui.secondary.menu a {
+  color: whitesmoke;
+}
+
+.ui.secondary.menu .active.item,
+.ui.secondary.menu .item:hover {
+  color: whitesmoke;
+}
+
+.ui.secondary.menu .active.item {
+  background: rgba(0, 0, 0, 0.2);
+}
+
 .page-title {
-  display: block !important;
-  text-align: center;
-  font-size: 2rem;
-  margin-top: 10px;
+  display: flex !important;
+  justify-content: center !important;
+
 }
 
 .form-container {
-  width: 400px;
+  width: 45%;
   margin: auto;
 }
 
-.ui.teal.button:focus,
-.ui.teal.buttons .button:focus {
-  background-color: #00b5ad;
+.ui.card>.extra {
+  background-color: rgba(0, 0, 0, .05);
+}
+
+.ui.button:not(.icon)>.icon:not(.button):not(.dropdown) {
+  margin: 0;
+}
+
+.ui.basic.button,
+.ui.red.button {
+  padding-left: .8rem;
+  padding-right: .8rem;
+}
+
+.ui.grid.row{
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.ui.fluid.card {
+  width: 100%;
+  max-width: 9999px;
+  margin-left: 20px;
 }
